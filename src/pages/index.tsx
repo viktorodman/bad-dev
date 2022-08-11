@@ -1,20 +1,13 @@
-import { TextField } from '@mui/material'
+import { Button, ButtonGroup, Grid, TextField, Typography } from '@mui/material'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import { useState } from 'react'
-
-const qrcodeRegionId = "html5qr-code-full-region";
 import styles from '../styles/Home.module.css'
-import Html5QrcodePlugin from '@components/QrCodeScanner'
-import QrCodeScanner from '@components/QrCodeScanner'
+import QrCodeScanner from '@components/qr-code-scanner/QrCodeScanner'
+import DeviceRegistration from '@modules/device-registration/DeviceRegistration'
+import MenuDrawer from '@modules/menu-drawer/MenuDrawer'
 
 const Home: NextPage = () => {
-  const [devEUI, setDevEUI] = useState("")
-  const onNewScanResult = (props:any)  => {
-    setDevEUI(props)
-  }
-
   return (
     <div className={styles.container}>
       <Head>
@@ -24,38 +17,18 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h2>Skriv saker</h2>
-        {/* <TextField id='outlined-basic' label="Outlined" variant='outlined'/> */}
-        <TextField id='name' label="Name" color="secondary" focused />
-        <TextField id='dev_eui' label="Dev EUI" color="secondary" focused value={devEUI}/>
-        <TextField id="app_eui" label="App EUI" color="secondary" focused />
-        <TextField id="app_key" label="App Key" color="secondary" focused />
-        <QrCodeScanner
-            config={{
-              fps: 10,
-              qrbox: 250,
-              disableFlip: false
-            }}
-            successCallback={onNewScanResult}
-          />
+        {/* <DeviceRegistration/> */}
+       {/*  <ButtonGroup variant="outlined" aria-label="outlined button group">
+            <Button>One</Button>
+            <Button>Two</Button>
+            <Button>Three</Button>
+        </ButtonGroup> */}
+        <MenuDrawer/>
       </main>
     </div>
   )
+
+  
 }
-
-/* const Test = (props:any) => {
-  const [result, setResult] = useState("yeye");
-  const onNewScanResult = (props:any)  => {
-    setResult(props)
-  }
-
-  return (
-    <>
-     <h1>Html5Qrcode React example!</h1>
-          
-    <p>{result}</p>
-    </>
-  );
-}; */
 
 export default Home
